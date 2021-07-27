@@ -63,8 +63,44 @@ async function addDepartment(){
     await DB.createDepartment(department);
     mainMenu();
 }
-async function addEmploy(){
 
+async function addEmploy(){
+    const roles = await DB.viewAllRoles()
+    const roleChoices = roles.map(({id,title})=>({
+        name: title,
+        value: id
+    }))
+
+    const managers = await DB.viewAllEmp()
+    const managerChoices = managers.map(({id, first_name, last_name})=>({
+        name: `${first_name} ${last_name}`,
+        value: id
+    }))
+    const employee = await inquirer.prompt([
+        {
+            type: "input",
+            name: "first_name",
+            message: "What is the employee's first name?"
+        },
+        {
+            type: "input",
+            name: "last_name",
+            message: "What is the employee's last name?"
+        },
+        {
+            type: "list",
+            name: "role_id",
+            message: "What is the role?",
+            choices: roleChoices
+        },
+        {
+            type: "list",
+            name: "manager_id",
+            message: "Who is the manager?",
+            choices: managerChoices
+        }
+    ])
+    await DB.addEmp(employee)
     mainMenu();
 }
 async function addRole(){
