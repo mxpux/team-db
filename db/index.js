@@ -59,7 +59,7 @@ class DB {
         );
     }
 
-    addDepartment(department) {
+    createDepartment(department) {
         return this.connection.query(
             `
         INSERT INTO

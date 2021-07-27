@@ -1,6 +1,6 @@
 const inquirer = require("inquirer");
-const { viewAllEmployee, addEmp, addDepartment } = require("./db");
 const DB = require("./db");
+require("console.table")
 
 async function mainMenu(){
     const {choice} = await inquirer.prompt ([
@@ -25,10 +25,10 @@ async function mainMenu(){
              return viewAllRoles()
         case "View all Employees":
              return viewAllEmp()
-        case "Add a Department":
+        case "Add a department":
              return addDepartment()
         case "Add an Employee":
-             return addEmp()
+             return addEmploy()
         case "Add a role":
              return addRole()  
           
@@ -51,19 +51,48 @@ async function viewAllEmp(){
     mainMenu();
 }
 
-async function addDepart(){
-    const addDep = await DB.addDepart()
-    console.table(addDepartment)
+async function addDepartment(){
+    // console.log("test")
+    const department = await inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "What if your department name?"
+        }
+    ])
+    await DB.createDepartment(department);
     mainMenu();
 }
 async function addEmploy(){
-    const addEmployee = await DB.addEmploy()
-    console.table(addEmp)
+
     mainMenu();
 }
 async function addRole(){
-    const addRo = await DB.addRole()
-    console.table(addRole)
+    const departments = await DB.viewAllDepartments()
+    const departmentChoices = departments.map(({id, name})=>({
+        name: name,
+        value: id
+    }))
+
+    const role = await inquirer.prompt([
+        {
+            type: "input",
+            name: "title",
+            message: "What is the title of your role?"
+        },
+        {
+            type: "input",
+            name: "salary",
+            message: "How much is the salary?"
+        },
+        {
+            type: "list",
+            name: "department_id",
+            message: "Which department do you work for?",
+            choices: departmentChoices
+        }
+    ])
+    await DB.addRole(role)
     mainMenu();
 }
 
