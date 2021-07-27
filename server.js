@@ -47,7 +47,7 @@ async function viewAllRoles(){
 }
 async function viewAllEmp(){
     const emp = await DB.viewAllEmp()
-    console.table(roles)
+    console.table(emp)
     mainMenu();
 }
 
