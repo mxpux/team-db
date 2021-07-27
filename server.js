@@ -1,15 +1,25 @@
-const express = require('express');
-const mysql = require('mysql2');
-const PORT = process.env.PORT || 3001;
-const app = express();
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-const db = mysql.createConnection(
-    {
-        host: "localhost",
-        user: "root",
-        password: "hello",
-        database: "Employee_Tracker"
-    },
-    console.log("--Connected--")
-);
+const inquirer = require("inquirer");
+const DB = require("./db");
+
+async function mainMenu(){
+    const {choice} = await inquirer.prompt ([
+       {
+           type: "list",
+           name: "choice",
+           message: "What action would you like to perform?",
+           choices: [
+               "View all Departments"
+           ] 
+       } 
+    ])
+     switch (choice){
+         case "View all Departments":
+             return viewAllDepartments()
+     }
+}
+
+async function viewAllDepartments(){
+    const departments = await DB.viewAllDepartments()
+    console.table(departments)
+}
+viewAllDepartments();

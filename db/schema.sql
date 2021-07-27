@@ -1,6 +1,6 @@
 DROP DATABASE IF EXISTS Employee_Tracker;
 CREATE DATABASE Employee_Tracker;
-USE Employee_Tracker;   
+USE Employee_Tracker;
 
 -- id: INT PRIMARY KEY
 -- name: VARCHAR(30)
