@@ -13,13 +13,13 @@
 ***
 > **Team DataBase - Employee Tracker** 
 ***
-![Screenshot of Team DataBase - Employee Tracker)](https://i.imgur.com/UN3n6lA.png)
-![Screenshot of Team DataBase - Employee Tracker)](https://i.imgur.com/g7euDQO.png)
+![Screenshot of Team DataBase - Employee Tracker)](https://i.imgur.com/oIs2Lip.png)
+![Screenshot of Team DataBase - Employee Tracker)](https://i.imgur.com/tC1rRc0.png)
 
 ***
 > **Team DataBase - Employee Tracker Demo**
 
-> Full Demo link: [**Demo of Team DataBase - Employee Tracker**](https://streamable.com/9jqhk0)
+> Full Demo link: [**Demo of Team DataBase - Employee Tracker**](https://streamable.com/a3rolt)
 ***
 
 > #### Coding Languages used on this project:
