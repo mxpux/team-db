@@ -13,14 +13,13 @@
 ***
 > **Team DataBase - Employee Tracker** 
 ***
-![Screenshot of Team DataBase - Employee Tracker)](https://i.imgur.com/qkJVxj1.png)
+![Screenshot of Team DataBase - Employee Tracker)](https://i.imgur.com/UN3n6lA.png)
+![Screenshot of Team DataBase - Employee Tracker)](https://i.imgur.com/g7euDQO.png)
 
 ***
 > **Team DataBase - Employee Tracker Demo**
 
-> Full Demo link: [**Demo of Team DataBase - Employee Tracker**](https://streamable.com/4ka2k2)
-***
-> Test link: [**Test Demo of Team DataBase - Employee Tracker**](https://streamable.com/onfdbh)
+> Full Demo link: [**Demo of Team DataBase - Employee Tracker**](https://streamable.com/9jqhk0)
 ***
 
 > #### Coding Languages used on this project:
@@ -29,6 +28,9 @@
 > - [x] Node JS
 > - [x] MySQL
 > - [x] WorkBench
+> - [x] Console.table
+> - [x] Express
+
 
 
 ***
