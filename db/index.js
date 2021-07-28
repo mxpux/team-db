@@ -7,8 +7,8 @@ class DB {
         return this.connection.query(
             `
         SELECT
-            department.id,
-            department.name
+            department.id AS ID,
+            department.name AS Department
         FROM
              department
         ORDER BY
@@ -20,10 +20,10 @@ class DB {
         return this.connection.query(
             `
         SELECT
-            role.id,
-            role.title,
-            role.salary,
-            department.name
+            role.id AS ID,
+            role.title AS Title,
+            role.salary AS Salary,
+            department.name AS Department
         FROM
             role 
         LEFT JOIN 
@@ -38,22 +38,20 @@ class DB {
         return this.connection.query(
             `   
         SELECT
-            employee.id,
-            employee.first_name,
-            employee.last_name,
-            role.title,
-            role.salary,
-            department.name,
-            employee.manager_id
-        FROM
-            employee
+            e.id AS ID,
+            e.first_name AS "First_Name",
+            e.last_name AS "Last_Name",
+            role.title AS Title,
+            role.salary AS Salary,
+            department.name AS Department,
+            (SELECT CONCAT(first_name, ' ', last_name) FROM employee WHERE id = e.manager_id) AS Manager
+        FROM 
+            employee e
         LEFT JOIN 
-            role ON employee.role_id = role.id
+            role ON e.role_id = role.id
         LEFT JOIN
             department ON role.department_id = department.id
-        LEFT JOIN
-            employee AS employeeTable ON employee.manager_id = employee.id
-		ORDER BY
+        ORDER BY
 			department.id;
         `
         );
@@ -89,6 +87,22 @@ class DB {
         `, role
         );
     }
+    addSalaryComb() {
+        return this.connection.query(
+            `
+        SELECT
+            department.name,
+        SUM(role.salary) AS Salary
+        FROM
+            department
+        JOIN
+            role on role.department_id = department.id
+        GROUP BY
+            department.name
+        `,
+        );
+    }
 
 }
+
 module.exports = new DB(connection);

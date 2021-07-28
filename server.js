@@ -1,4 +1,5 @@
 const inquirer = require("inquirer");
+const { addSalaryComb } = require("./db");
 const DB = require("./db");
 require("console.table")
 
@@ -14,7 +15,8 @@ async function mainMenu(){
                "View all Employees",
                "Add a department",
                "Add a role",
-               "Add an Employee"
+               "Add an Employee",
+               "View Salary"
            ] 
        } 
     ])
@@ -30,7 +32,9 @@ async function mainMenu(){
         case "Add an Employee":
              return addEmploy()
         case "Add a role":
-             return addRole()  
+             return addRole()
+        case "View Salary":
+            return viewSalary()   
      }
 }
 async function viewAllDepartments(){
@@ -62,14 +66,16 @@ async function addDepartment(){
 }
 async function addEmploy(){
     const roles = await DB.viewAllRoles()
-    const roleChoices = roles.map(({id,title})=>({
-        name: title,
-        value: id
+    // console.log(roles)
+    const roleChoices = roles.map(({ID,Title})=>({
+        name: Title,
+        value: ID
     }))
     const managers = await DB.viewAllEmp()
-    const managerChoices = managers.map(({id, first_name, last_name})=>({
-        name: `${first_name} ${last_name}`,
-        value: id
+    // console.log(managers)
+    const managerChoices = managers.map(({ID, First_Name, Last_Name})=>({
+        name: `${First_Name} ${Last_Name}`,
+        value: ID
     }))
     const employee = await inquirer.prompt([
         {
@@ -100,9 +106,10 @@ async function addEmploy(){
 }
 async function addRole(){
     const departments = await DB.viewAllDepartments()
-    const departmentChoices = departments.map(({id, name})=>({
-        name: name,
-        value: id
+    // console.log(departments)
+    const departmentChoices = departments.map(({ID, Department})=>({
+        name: Department,
+        value: ID
     }))
     const role = await inquirer.prompt([
         {
@@ -123,6 +130,13 @@ async function addRole(){
         }
     ])
     await DB.addRole(role)
+    mainMenu();
+}
+
+async function viewSalary(){
+
+    const combinesalary = await DB.addSalaryComb();
+    console.table(combinesalary)
     mainMenu();
 }
 mainMenu();
