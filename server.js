@@ -31,10 +31,8 @@ async function mainMenu(){
              return addEmploy()
         case "Add a role":
              return addRole()  
-          
      }
 }
-
 async function viewAllDepartments(){
     const departments = await DB.viewAllDepartments()
     console.table(departments)
@@ -50,7 +48,6 @@ async function viewAllEmp(){
     console.table(emp)
     mainMenu();
 }
-
 async function addDepartment(){
     // console.log("test")
     const department = await inquirer.prompt([
@@ -63,14 +60,12 @@ async function addDepartment(){
     await DB.createDepartment(department);
     mainMenu();
 }
-
 async function addEmploy(){
     const roles = await DB.viewAllRoles()
     const roleChoices = roles.map(({id,title})=>({
         name: title,
         value: id
     }))
-
     const managers = await DB.viewAllEmp()
     const managerChoices = managers.map(({id, first_name, last_name})=>({
         name: `${first_name} ${last_name}`,
@@ -109,7 +104,6 @@ async function addRole(){
         name: name,
         value: id
     }))
-
     const role = await inquirer.prompt([
         {
             type: "input",
@@ -131,5 +125,4 @@ async function addRole(){
     await DB.addRole(role)
     mainMenu();
 }
-
 mainMenu();
